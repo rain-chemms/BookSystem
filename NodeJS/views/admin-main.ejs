@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/stylesheets/common.css">
+    <link rel="stylesheet" href="/stylesheets/admin-main-style.css">
+    <title>BKSY图书后台管理</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="/images/Adminster.png" alt="图片加载失败">
+            <span id="adminster-name">管理员系统</span>
+            <button type="submit" class="logout-button">退出登录<button>
+        </div>
+        <div class="sidebar">
+            <header>
+                <h3>
+                    <img src="/images/Logo.png" alt="图片加载失败" id="admin-main-logo">
+                    <div>BKSY后台管理系统</div>
+                </h3>
+            </header>
+            <ul>
+                <li>
+                    <div class="menu"> <!--active"-->
+                        <img src="/images/HomeFilled.png" alt="图片加载失败">
+                        <span>用户管理</span>
+                        <img src="/images/ArrowDown.png" alt="图片加载失败">
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="menu-item">
+                                <img src="/images/HomeFilled.png" alt="图片加载失败">
+                                <a data-target="user-message-table-content-area">信息查询</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="menu-item">
+                                <img src="/images/HomeFilled.png" alt="图片加载失败">
+                                <a href="#">信息修改</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="menu-item">
+                                <img src="/images/HomeFilled.png" alt="图片加载失败">
+                                <a href="#">删除用户</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="menu-item">
+                                <img src="/images/HomeFilled.png" alt="图片加载失败">
+                                <a href="#">添加用户</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="menu"> <!--active"-->
+                        <img src="/images/HomeFilled.png" alt="图片加载失败">
+                        <span>书籍库管理</span>
+                        <img src="/images/ArrowDown.png" alt="图片加载失败">
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="menu-item">
+                                <img src="/images/HomeFilled.png" alt="图片加载失败">
+                                <a href="#">书目查询</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="menu-item">
+                                <img src="/images/HomeFilled.png" alt="图片加载失败">
+                                <a href="#">书目删除</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="menu-item">
+                                <img src="/images/HomeFilled.png" alt="图片加载失败">
+                                <a href="#">书目修改</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="menu">  <!--active"-->
+                        <img src="/images/HomeFilled.png" alt="图片加载失败">
+                        <span>管理员信息</span>
+                        <img src="/images/ArrowDown.png" alt="图片加载失败">
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="menu-item">
+                                <img src="/images/HomeFilled.png" alt="图片加载失败">
+                                <a href="#">管理员查询</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="content-area" id="default-content-area">
+                <h2 style="color:#fff;text-align:center;margin-top:40px;margin-bottom:-40px;">选择一个右侧列表中的选项开始管理吧</h2>                
+                <img src="/images/DefaultContentAreaLibrary.png" alt="图片加载失败" id="default-content-area-image">
+            </div>
+            <div class="content-area" id="user-message-table-content-area">
+                <div class="button-group">
+                    <button class="button-group-item" id="user-message-refresh-button">刷新</button>
+                </div>
+                <table class="content-table" id="user-message-table">
+                    <tr>
+                        <th>用户ID</th>
+                        <th>用户名</th>
+                        <th>用户密码</th>
+                        <th>用户手机号</th>
+                        <th>用户邮箱</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="content-area" id="user-message-table">
+            </div>
+
+        </div>
+    </div>
+    <script src="/javascripts/admin-main-source.js"></script>
+</body>
+
+</html>

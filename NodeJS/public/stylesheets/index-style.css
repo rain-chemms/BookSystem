@@ -1,0 +1,80 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: url("/images/BackGroundIndex.png");
+  background-size: 100% 100%;
+  overflow: hidden;
+  color:#fff;
+}
+
+header  {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+header h1{
+  font-size: 12px;
+  font-weight: 600;
+  color: #000000;
+}
+
+#admin-logo{
+  width: 80px;
+  height: 48px;
+}
+
+form{
+  margin-bottom: 30px;
+  align-items: center; 
+}
+
+form .submit-button{
+  width: 196px;
+  height: 38px;
+  border-radius: 12px;
+  color:#000000;
+  background-color: #ff00ee;
+  scale: 1.00;
+  outline: none;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  outline: none;
+}
+
+form .submit-button:hover{
+  background-color: #ff7df6;
+  scale: 1.05;
+  outline: auto;
+  outline-color: #fff;
+  outline-width: 20px;
+}
+
+form .submit-button:focus{
+  outline: auto;  
+  outline-color: #b700ff;
+}
+
+form .submit-button:active{
+  color:#fff;
+  background:#b200a6;
+  scale: 0.95;
+}
+
+.form-list{
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-list-item{
+  display: flex;
+  justify-content: space-between;
+  margin-left:auto;
+  margin-right:auto;
+}
+

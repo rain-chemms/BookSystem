@@ -1,0 +1,29 @@
+*{
+    margin:0; 
+    padding:0;
+}
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+/*去除默认样式*/
+input,button{
+    border: 0px;
+    background-color: none;
+    outline: none;
+}
+
+ul,li{
+    list-style: none;
+}
+
+a{
+  color:#00B7FF;
+  text-decoration: none;
+}
+  

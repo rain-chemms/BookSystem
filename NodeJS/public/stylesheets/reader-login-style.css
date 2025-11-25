@@ -1,0 +1,95 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: url("/images/BackGroundLogin.png");
+  background-size: 100% 100%;
+  overflow: hidden;
+  color:#fff;
+}
+
+header  {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+header h1{
+  font-size: 12px;
+  font-weight: 600;
+  color: #000000;
+}
+
+form{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+form .form-group + .form-group{
+  margin-top: 20px;
+}
+
+form .form-group{
+  display: flex;
+  justify-content: space-between;
+}
+
+form input{
+  width: 338px;
+  height: 40px;
+  margin-left: 20px;
+  border-radius: 12px;
+  font-size: 24px;
+  font-weight: 600;
+  scale: 1.00;
+  text-align: center;
+}
+
+form input:hover{
+  outline: auto;
+  outline-color: #fff;
+  outline-width: 20px;
+  scale: 1.02;
+  text-align: center;
+}
+
+form input:active{
+  background-color: #979797;
+  scale: 0.98;
+  text-align: center;
+}
+
+form input:focus{
+  outline: auto;
+  outline-color: #9218fe;
+  text-align: center;
+}
+
+form label{
+  line-height: 40px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+#admin-logo{
+  width: 80px;
+  height: 48px;
+}
+
+#input-submit-button{
+    width:400px;
+    background-color: #9218fe;
+    outline:none;
+}
+
+#input-submit-button:hover{
+    background-color: #a039fa;
+}
+
+#input-submit-button:active{
+    color :#fff ;
+    background-color: #5d0ea1;
+}
