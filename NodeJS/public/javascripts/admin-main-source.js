@@ -138,7 +138,7 @@ fix_id_search_form.addEventListener('submit', async (e) => {
         console.log(idData);
         console.log('-----------------------------');
 
-        const response = await fetch('/admin/admin-main/fix-id', {
+        const response = await fetch('/admin/admin-main/fix-search-id', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ idData })
@@ -147,6 +147,10 @@ fix_id_search_form.addEventListener('submit', async (e) => {
         //结果处理
         //console.log(result);
         //const data = result;
+        if(result === null || result.length <= 0){
+            alert('没有找到ID为'+idData+'的用户');
+            return;
+        }
         //清空当前数据
         while (fix_table.rows.length > 1) {
             fix_table.deleteRow(fix_table.rows.length - 1);
@@ -157,55 +161,93 @@ fix_id_search_form.addEventListener('submit', async (e) => {
         result.forEach(data => {
             const indexResultRow = document.createElement('tr');
             const indexTitle = document.createElement('th');
-            indexTitle.textContent = "搜索结果" + index;
+            const idMessage = data.UserID;
+            indexTitle.textContent = "搜索结果:" + index+" | 用户ID:"+idMessage;
             indexResultRow.appendChild(indexTitle);
             fix_table.appendChild(indexResultRow);
-
             const nameRow = document.createElement('tr');
             const nameTitle = document.createElement('th');
             const nameInformation = document.createElement('td');
+            const nameFixBar = document.createElement('td');
             const nameFixButton = document.createElement('button');
+            nameFixButton.style.classList ='button-group-item'; 
             nameTitle.textContent = '姓名';
             nameInformation.textContent = data.UserName;
+            nameFixBar.contentEditable = 'true';
+            nameFixBar.className = 'editable-bar';
             nameFixButton.textContent = '修改';
+            nameFixButton.className ='button-group-item';
             nameRow.appendChild(nameTitle);
             nameRow.appendChild(nameInformation);
+            nameRow.appendChild(nameFixBar);
             nameRow.appendChild(nameFixButton);
             fix_table.appendChild(nameRow);
 
             const pwdRow = document.createElement('tr');
             const pwdTitle = document.createElement('th');
             const pwdInformation = document.createElement('td');
+            const pwdFixBar = document.createElement('td');
             const pwdFixButton = document.createElement('button');
             pwdTitle.textContent = '密码';
             pwdInformation.textContent = data.UserPwd;
+            pwdFixBar.contentEditable = 'true';
+            pwdFixBar.className = 'editable-bar';
             pwdFixButton.textContent = '修改';
+            pwdFixButton.className = 'button-group-item';
             pwdRow.appendChild(pwdTitle);
             pwdRow.appendChild(pwdInformation);
+            pwdRow.appendChild(pwdFixBar);
             pwdRow.appendChild(pwdFixButton);
             fix_table.appendChild(pwdRow);
 
             const phoneRow = document.createElement('tr');
             const phoneTitle = document.createElement('th');
+            const phoneFixBar = document.createElement('td');
             const phoneInformation = document.createElement('td');
             const phoneFixButton = document.createElement('button');
             phoneTitle.textContent = '手机号';
             phoneInformation.textContent = data.UserPhoneNumber;
+            phoneFixBar.contentEditable = 'true';
+            phoneFixBar.className = 'editable-bar';
             phoneFixButton.textContent = '修改';
+            phoneFixButton.className = 'button-group-item';
+            phoneFixButton.addEventListener('click',async (e)=>{
+            const newPhone = phoneFixBar.textContent;
+                if(!newPhone || newPhone.length !== 11 || !/^\d+$/.test(newPhone)){
+                    alert('新的电话号码必须为11位数字,不能为空且不能含有数字以外的字符');
+                    return;
+                }
+                handlePhoneFix(idMessage, newPhone);
+            });
             phoneRow.appendChild(phoneTitle);
             phoneRow.appendChild(phoneInformation);
+            phoneRow.appendChild(phoneFixBar);
             phoneRow.appendChild(phoneFixButton);
             fix_table.appendChild(phoneRow);
 
             const emailRow = document.createElement('tr');
             const emailTitle = document.createElement('th');
             const emailInformation = document.createElement('td');
+            const emailFixBar = document.createElement('td');
             const emailFixButton = document.createElement('button');
             emailTitle.textContent = '电子邮箱';
             emailInformation.textContent = data.UserEmail;
+            emailFixBar.contentEditable = 'true';
+            emailFixBar.className = 'editable-bar';
             emailFixButton.textContent = '修改';
+            emailFixButton.className = 'button-group-item';
+            emailFixButton.addEventListener('click',async (e)=>{
+            const newEmail = emailFixBar.textContent;
+                if(!newEmail || newEmail.length <= 0){
+                    alert('新的邮箱不能为空');
+                    return;
+                }
+                handleEmailFix(idMessage, newEmail);
+            });
+
             emailRow.appendChild(emailTitle);
             emailRow.appendChild(emailInformation);
+            emailRow.appendChild(emailFixBar);
             emailRow.appendChild(emailFixButton);
             fix_table.appendChild(emailRow);
             index ++;
@@ -219,7 +261,172 @@ fix_id_search_form.addEventListener('submit', async (e) => {
 });
 //Name按钮绑定函数
 fix_name_search_form.addEventListener('submit', async (e) => {
-    //清空当前数据
     e.preventDefault(); // 阻止表单默认提交（页面刷新）
+    // 1. 获取表单数据
+    const form = e.target;
+    const nameData = form.nameBar.value.trim(); // 'id' 或 'name'
+    if (!nameData) {
+        alert("你好像没输入查找的Name!(>_<)!")
+        return;
+    }
 
+    try {
+        //设置路由
+        //console.log('-----------------------------');
+        //console.log(nameData);
+        //console.log('-----------------------------');
+
+        const response = await fetch('/admin/admin-main/fix-search-name', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nameData })
+        });
+        const result = await response.json();
+        //结果处理
+        //console.log(result);
+        //const data = result;
+        if(result === null || result.length <= 0){
+            alert('没有找到Name为'+nameData+'的用户');
+            return;
+        }
+        //清空当前数据
+        while (fix_table.rows.length > 1) {
+            fix_table.deleteRow(fix_table.rows.length - 1);
+        }
+        //加入新数据
+        ///*
+        let index = 1;
+        result.forEach(data => {
+            const indexResultRow = document.createElement('tr');
+            const indexTitle = document.createElement('th');
+            const idMessage = data.UserID;
+            indexTitle.textContent = "搜索结果:" + index+" | 用户ID:"+idMessage;
+            indexResultRow.appendChild(indexTitle);
+            fix_table.appendChild(indexResultRow);
+            const nameRow = document.createElement('tr');
+            const nameTitle = document.createElement('th');
+            const nameInformation = document.createElement('td');
+            const nameFixBar = document.createElement('td');
+            const nameFixButton = document.createElement('button');
+            nameFixButton.style.classList ='button-group-item'; 
+            nameTitle.textContent = '姓名';
+            nameInformation.textContent = data.UserName;
+            nameFixBar.contentEditable = 'true';
+            nameFixBar.className = 'editable-bar';
+            nameFixButton.textContent = '修改';
+            nameFixButton.className ='button-group-item';
+            nameRow.appendChild(nameTitle);
+            nameRow.appendChild(nameInformation);
+            nameRow.appendChild(nameFixBar);
+            nameRow.appendChild(nameFixButton);
+            fix_table.appendChild(nameRow);
+
+            const pwdRow = document.createElement('tr');
+            const pwdTitle = document.createElement('th');
+            const pwdInformation = document.createElement('td');
+            const pwdFixBar = document.createElement('td');
+            const pwdFixButton = document.createElement('button');
+            pwdTitle.textContent = '密码';
+            pwdInformation.textContent = data.UserPwd;
+            pwdFixBar.contentEditable = 'true';
+            pwdFixBar.className = 'editable-bar';
+            pwdFixButton.textContent = '修改';
+            pwdFixButton.className = 'button-group-item';
+            pwdRow.appendChild(pwdTitle);
+            pwdRow.appendChild(pwdInformation);
+            pwdRow.appendChild(pwdFixBar);
+            pwdRow.appendChild(pwdFixButton);
+            fix_table.appendChild(pwdRow);
+
+            const phoneRow = document.createElement('tr');
+            const phoneTitle = document.createElement('th');
+            const phoneFixBar = document.createElement('td');
+            const phoneInformation = document.createElement('td');
+            const phoneFixButton = document.createElement('button');
+            phoneTitle.textContent = '手机号';
+            phoneInformation.textContent = data.UserPhoneNumber;
+            phoneFixBar.contentEditable = 'true';
+            phoneFixBar.className = 'editable-bar';
+            phoneFixButton.textContent = '修改';
+            phoneFixButton.className = 'button-group-item';
+            phoneFixButton.addEventListener('click',async (e)=>{
+            const newPhone = phoneFixBar.textContent;
+                if(!newPhone || newPhone.length !== 11 || !/^\d+$/.test(newPhone)){
+                    alert('新的电话号码必须为11位数字,不能为空且不能含有数字以外的字符');
+                    return;
+                }
+                handlePhoneFix(idMessage, newPhone);
+            });
+            phoneRow.appendChild(phoneTitle);
+            phoneRow.appendChild(phoneInformation);
+            phoneRow.appendChild(phoneFixBar);
+            phoneRow.appendChild(phoneFixButton);
+            fix_table.appendChild(phoneRow);
+
+            const emailRow = document.createElement('tr');
+            const emailTitle = document.createElement('th');
+            const emailInformation = document.createElement('td');
+            const emailFixBar = document.createElement('td');
+            const emailFixButton = document.createElement('button');
+            emailTitle.textContent = '电子邮箱';
+            emailInformation.textContent = data.UserEmail;
+            emailFixBar.contentEditable = 'true';
+            emailFixBar.className = 'editable-bar';
+            emailFixButton.textContent = '修改';
+            emailFixButton.className = 'button-group-item';
+            emailFixButton.addEventListener('click',async (e)=>{
+                const newEmail = emailFixBar.textContent;
+                if(!newEmail || newEmail.length <= 0){
+                    alert('新的邮箱不能为空');
+                    return;
+                }
+                handleEmailFix(idMessage, newEmail);
+            });
+
+            emailRow.appendChild(emailTitle);
+            emailRow.appendChild(emailInformation);
+            emailRow.appendChild(emailFixBar);
+            emailRow.appendChild(emailFixButton);
+            fix_table.appendChild(emailRow);
+            index ++;
+        });
+        //*/
+    } catch (err) {
+        console.error("查询失败：", err);
+        alert("网络错误或服务器无响应");
+    }
 });
+
+async function handleEmailFix(userID,newEmail){
+    try{
+        const response = await fetch('/admin/admin-main/fix-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userID,newEmail })
+        });
+        const result = await response.json();
+        console.log(result);
+        alert("修改电子邮箱成功!");
+    }
+    catch (err) {
+        console.error("修改失败：", err);
+        alert("修改失败，服务器未响应!");
+    }
+}
+
+async function handlePhoneFix(userID,newPhone){
+    try{
+        const response = await fetch('/admin/admin-main/fix-phone', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userID,newPhone })
+        });
+        const result = await response.json();
+        console.log(result);
+        alert("修改电话号码成功!");
+    }
+    catch (err) {
+        console.error("修改失败：", err);
+        alert("修改失败，服务器未响应!");
+    }
+}

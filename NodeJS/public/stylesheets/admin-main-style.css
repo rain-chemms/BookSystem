@@ -315,3 +315,20 @@ a,span{
 .content-area div{
     text-align: center;
 }
+
+.editable-bar{
+    outline-offset:-2px;
+    outline-style: dashed;
+    outline-color: #803cff;
+}
+
+.editable-bar:hover{
+    outline-style: dotted;
+    outline-color: #ff00f2;
+}
+
+.editable-bar:focus{
+    outline-style: auto;
+    outline-color: #fff;
+    outline-width: 600;
+}
