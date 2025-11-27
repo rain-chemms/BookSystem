@@ -35,8 +35,8 @@ default_content_area.style.display = 'block';
 menu_items.forEach(menu_item => {
     menu_item.addEventListener('click', function () {
         // 遍历所有菜单项，并移除 active 类
-        menu_items.forEach(item => { 
-            if (item !== this) { item.classList.remove('active') } 
+        menu_items.forEach(item => {
+            if (item !== this) { item.classList.remove('active') }
         });
         // 添加当前菜单项的 active 类
         this.classList.toggle('active');
@@ -51,11 +51,11 @@ menu_items.forEach(menu_item => {
         // 显示目标内容
         const targetContent = main_content.querySelector(`#${targetId}`);
         if (targetContent) {
-            if(menu_item.classList.contains('active')){
+            if (menu_item.classList.contains('active')) {
                 targetContent.style.display = 'block';
                 default_content_area.style.display = 'none';
             }
-            else{
+            else {
                 default_content_area.style.display = 'block';
             }
         }
@@ -78,7 +78,7 @@ user_message_refresh_button.addEventListener('click', async () => {
 
         console.log(data);
 
-        data.forEach(item=>{
+        data.forEach(item => {
             //创建当前行
             const row = document.createElement('tr');
             //行内容单元创建
@@ -106,9 +106,120 @@ user_message_refresh_button.addEventListener('click', async () => {
             // 将行添加到表格
             user_message_table.appendChild(row);
         });
-        
+
     } catch (error) {
         console.error('获取数据失败:', error);
-        alert(error);
+        alert("网络错误或服务器无响应");
     }
+});
+
+//信息修改部分
+const fix_id_search_form = document.getElementById('fix-id-form');
+const fix_name_search_form = document.getElementById('fix-name-form');
+const fix_table = document.getElementById('user-fix-table');
+//ID按钮绑定函数
+fix_id_search_form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // 阻止表单默认提交（页面刷新）
+    // 1. 获取表单数据
+    const form = e.target;
+    const idData = form.idBar.value.trim(); // 'id' 或 'name'
+    if (!idData) {
+        alert("你好像没输入查找的ID!(>_<)!")
+        return;
+    }
+    if (!/^\d+$/.test(idData)) {
+        alert("我怎么记得ID好像都是数字 [-_-]...");
+        return;
+    }
+
+    try {
+        //设置路由
+        console.log('-----------------------------');
+        console.log(idData);
+        console.log('-----------------------------');
+
+        const response = await fetch('/admin/admin-main/fix-id', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idData })
+        });
+        const result = await response.json();
+        //结果处理
+        //console.log(result);
+        //const data = result;
+        //清空当前数据
+        while (fix_table.rows.length > 1) {
+            fix_table.deleteRow(fix_table.rows.length - 1);
+        }
+        //加入新数据
+        ///*
+        let index = 1;
+        result.forEach(data => {
+            const indexResultRow = document.createElement('tr');
+            const indexTitle = document.createElement('th');
+            indexTitle.textContent = "搜索结果" + index;
+            indexResultRow.appendChild(indexTitle);
+            fix_table.appendChild(indexResultRow);
+
+            const nameRow = document.createElement('tr');
+            const nameTitle = document.createElement('th');
+            const nameInformation = document.createElement('td');
+            const nameFixButton = document.createElement('button');
+            nameTitle.textContent = '姓名';
+            nameInformation.textContent = data.UserName;
+            nameFixButton.textContent = '修改';
+            nameRow.appendChild(nameTitle);
+            nameRow.appendChild(nameInformation);
+            nameRow.appendChild(nameFixButton);
+            fix_table.appendChild(nameRow);
+
+            const pwdRow = document.createElement('tr');
+            const pwdTitle = document.createElement('th');
+            const pwdInformation = document.createElement('td');
+            const pwdFixButton = document.createElement('button');
+            pwdTitle.textContent = '密码';
+            pwdInformation.textContent = data.UserPwd;
+            pwdFixButton.textContent = '修改';
+            pwdRow.appendChild(pwdTitle);
+            pwdRow.appendChild(pwdInformation);
+            pwdRow.appendChild(pwdFixButton);
+            fix_table.appendChild(pwdRow);
+
+            const phoneRow = document.createElement('tr');
+            const phoneTitle = document.createElement('th');
+            const phoneInformation = document.createElement('td');
+            const phoneFixButton = document.createElement('button');
+            phoneTitle.textContent = '手机号';
+            phoneInformation.textContent = data.UserPhoneNumber;
+            phoneFixButton.textContent = '修改';
+            phoneRow.appendChild(phoneTitle);
+            phoneRow.appendChild(phoneInformation);
+            phoneRow.appendChild(phoneFixButton);
+            fix_table.appendChild(phoneRow);
+
+            const emailRow = document.createElement('tr');
+            const emailTitle = document.createElement('th');
+            const emailInformation = document.createElement('td');
+            const emailFixButton = document.createElement('button');
+            emailTitle.textContent = '电子邮箱';
+            emailInformation.textContent = data.UserEmail;
+            emailFixButton.textContent = '修改';
+            emailRow.appendChild(emailTitle);
+            emailRow.appendChild(emailInformation);
+            emailRow.appendChild(emailFixButton);
+            fix_table.appendChild(emailRow);
+            index ++;
+        });
+        //*/
+
+    } catch (err) {
+        console.error("查询失败：", err);
+        alert("网络错误或服务器无响应");
+    }
+});
+//Name按钮绑定函数
+fix_name_search_form.addEventListener('submit', async (e) => {
+    //清空当前数据
+    e.preventDefault(); // 阻止表单默认提交（页面刷新）
+
 });

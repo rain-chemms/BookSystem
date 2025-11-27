@@ -39,19 +39,19 @@
                         <li>
                             <div class="menu-item">
                                 <img src="/images/HomeFilled.png" alt="图片加载失败">
-                                <a href="#">信息修改</a>
+                                <a data-target="user-message-fix-content-area">信息修改</a>
                             </div>
                         </li>
                         <li>
                             <div class="menu-item">
                                 <img src="/images/HomeFilled.png" alt="图片加载失败">
-                                <a href="#">删除用户</a>
+                                <a data-target="user-delete-content-area">删除用户</a>
                             </div>
                         </li>
                         <li>
                             <div class="menu-item">
                                 <img src="/images/HomeFilled.png" alt="图片加载失败">
-                                <a href="#">添加用户</a>
+                                <a data-target="new-user-add-content-area">添加用户</a>
                             </div>
                         </li>
                     </ul>
@@ -117,17 +117,44 @@
                         <th>用户手机号</th>
                         <th>用户邮箱</th>
                     </tr>
+                </table>
+            </div>
+            <div class="content-area" id="user-message-fix-content-area">
+                <div>
+                    <h2 style="color: #fff;margin-top:10px;">请先搜索一个用户,再更改他的信息吧!<h2>
+                </div>
+                <div style="display:inline-block;">
+                    <h3>姓名搜索</h3>
+                    <form method="post"  id="fix-name-form">
+                        <input id="user-message-fix-name-input" name="nameBar">
+                        <button class="button-group-item">搜索</button>
+                    </form>
+                </div>
+                <div style="display:inline-block;">
+                    <h3>ID搜索</h3>
+                    <form method="post"  id="fix-id-form">
+                        <input id="user-message-fix-name-input" name="idBar">
+                        <button type="submit" class="button-group-item">搜索</button>
+                    </form>
+                </div>
+                <table class="content-table" id="user-fix-table">
                     <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
+                        <th>信息项</th>
+                        <th>信息内容</th>
+                        <th>修改按钮</th>
                     </tr>
                 </table>
             </div>
-            <div class="content-area" id="user-message-table">
+            
+            <div class="content-area" id="user-delete-content-area">
+                <div>删除页面</div>
             </div>
+            
+
+            <div class="content-area" id="new-user-add-content-area">
+                <div>添加页面</div>
+            </div>
+            
 
         </div>
     </div>
