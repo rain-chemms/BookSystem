@@ -147,13 +147,13 @@ fix_id_search_form.addEventListener('submit', async (e) => {
         //结果处理
         //console.log(result);
         //const data = result;
-        if(result === null || result.length <= 0){
-            alert('没有找到ID为'+idData+'的用户');
-            return;
-        }
         //清空当前数据
         while (fix_table.rows.length > 1) {
             fix_table.deleteRow(fix_table.rows.length - 1);
+        }
+        if(result === null || result.length <= 0){
+            alert('没有找到ID为'+idData+'的用户');
+            return;
         }
         //加入新数据
         ///*
@@ -163,6 +163,8 @@ fix_id_search_form.addEventListener('submit', async (e) => {
             const indexTitle = document.createElement('th');
             const idMessage = data.UserID;
             indexTitle.textContent = "搜索结果:" + index+" | 用户ID:"+idMessage;
+            indexTitle.colSpan = '4';
+            indexTitle.className = 'index-split-bar';
             indexResultRow.appendChild(indexTitle);
             fix_table.appendChild(indexResultRow);
             const nameRow = document.createElement('tr');
@@ -177,6 +179,17 @@ fix_id_search_form.addEventListener('submit', async (e) => {
             nameFixBar.className = 'editable-bar';
             nameFixButton.textContent = '修改';
             nameFixButton.className ='button-group-item';
+            nameFixButton.addEventListener('click',async (e)=>{
+                const newName = nameFixBar.textContent;
+                if(!newName){
+                    return;
+                }
+                else if(newName === nameInformation.textContent){
+                    alert(' (0_0) 你更改后的[名字]和原先一样呢 (0_0) ');
+                    return;
+                }
+                handleNameFix(idMessage, newName);
+            });
             nameRow.appendChild(nameTitle);
             nameRow.appendChild(nameInformation);
             nameRow.appendChild(nameFixBar);
@@ -194,6 +207,18 @@ fix_id_search_form.addEventListener('submit', async (e) => {
             pwdFixBar.className = 'editable-bar';
             pwdFixButton.textContent = '修改';
             pwdFixButton.className = 'button-group-item';
+            pwdFixButton.addEventListener('click',async (e)=>{
+                const newPwd = pwdFixBar.textContent;
+                if(!newPwd || newPwd.length <= 0){
+                    alert('新的密码不能为空');
+                    return;
+                }
+                else if(newPwd === pwdInformation.textContent){
+                    alert(' (0_0) 你更改后的[电子邮箱]和原先一样呢 (0_0) ');
+                    return;
+                }
+                handlePwdFix(idMessage, newPwd);
+            });
             pwdRow.appendChild(pwdTitle);
             pwdRow.appendChild(pwdInformation);
             pwdRow.appendChild(pwdFixBar);
@@ -217,6 +242,10 @@ fix_id_search_form.addEventListener('submit', async (e) => {
                     alert('新的电话号码必须为11位数字,不能为空且不能含有数字以外的字符');
                     return;
                 }
+                else if(newPhone === phoneInformation.textContent){
+                    alert(' (0_0) 你更改后的[电话号码]和原先一样呢 (0_0) ');
+                    return;
+                }
                 handlePhoneFix(idMessage, newPhone);
             });
             phoneRow.appendChild(phoneTitle);
@@ -237,14 +266,17 @@ fix_id_search_form.addEventListener('submit', async (e) => {
             emailFixButton.textContent = '修改';
             emailFixButton.className = 'button-group-item';
             emailFixButton.addEventListener('click',async (e)=>{
-            const newEmail = emailFixBar.textContent;
+                const newEmail = emailFixBar.textContent;
                 if(!newEmail || newEmail.length <= 0){
                     alert('新的邮箱不能为空');
                     return;
                 }
+                else if(newEmail === emailInformation.textContent){
+                    alert(' (0_0) 你更改后的[电子邮箱]和原先一样呢 (0_0) ');
+                    return;
+                }
                 handleEmailFix(idMessage, newEmail);
             });
-
             emailRow.appendChild(emailTitle);
             emailRow.appendChild(emailInformation);
             emailRow.appendChild(emailFixBar);
@@ -285,13 +317,13 @@ fix_name_search_form.addEventListener('submit', async (e) => {
         //结果处理
         //console.log(result);
         //const data = result;
-        if(result === null || result.length <= 0){
-            alert('没有找到Name为'+nameData+'的用户');
-            return;
-        }
         //清空当前数据
         while (fix_table.rows.length > 1) {
             fix_table.deleteRow(fix_table.rows.length - 1);
+        }
+        if(result === null || result.length <= 0){
+            alert('没有找到Name为'+nameData+'的用户');
+            return;
         }
         //加入新数据
         ///*
@@ -301,6 +333,8 @@ fix_name_search_form.addEventListener('submit', async (e) => {
             const indexTitle = document.createElement('th');
             const idMessage = data.UserID;
             indexTitle.textContent = "搜索结果:" + index+" | 用户ID:"+idMessage;
+            indexTitle.colSpan = '4';
+            indexTitle.className = 'index-split-bar';
             indexResultRow.appendChild(indexTitle);
             fix_table.appendChild(indexResultRow);
             const nameRow = document.createElement('tr');
@@ -315,6 +349,17 @@ fix_name_search_form.addEventListener('submit', async (e) => {
             nameFixBar.className = 'editable-bar';
             nameFixButton.textContent = '修改';
             nameFixButton.className ='button-group-item';
+            nameFixButton.addEventListener('click',async (e)=>{
+                const newName = nameFixBar.textContent;
+                if(!newName){
+                    return;
+                }
+                else if(newName === nameInformation.textContent){
+                    alert(' (0_0) 你更改后的[名字]和原先一样呢 (0_0) ');
+                    return;
+                }
+                handleNameFix(idMessage, newName);
+            });
             nameRow.appendChild(nameTitle);
             nameRow.appendChild(nameInformation);
             nameRow.appendChild(nameFixBar);
@@ -332,6 +377,18 @@ fix_name_search_form.addEventListener('submit', async (e) => {
             pwdFixBar.className = 'editable-bar';
             pwdFixButton.textContent = '修改';
             pwdFixButton.className = 'button-group-item';
+            pwdFixButton.addEventListener('click',async (e)=>{
+                const newPwd = pwdFixBar.textContent;
+                if(!newPwd || newPwd.length <= 0){
+                    alert('新的密码不能为空');
+                    return;
+                }
+                else if(newPwd === pwdInformation.textContent){
+                    alert(' (0_0) 你更改后的[电子邮箱]和原先一样呢 (0_0) ');
+                    return;
+                }
+                handlePwdFix(idMessage, newPwd);
+            });
             pwdRow.appendChild(pwdTitle);
             pwdRow.appendChild(pwdInformation);
             pwdRow.appendChild(pwdFixBar);
@@ -353,6 +410,10 @@ fix_name_search_form.addEventListener('submit', async (e) => {
             const newPhone = phoneFixBar.textContent;
                 if(!newPhone || newPhone.length !== 11 || !/^\d+$/.test(newPhone)){
                     alert('新的电话号码必须为11位数字,不能为空且不能含有数字以外的字符');
+                    return;
+                }
+                else if(newPhone === phoneInformation.textContent){
+                    alert(' (0_0) 你更改后的[电话号码]和原先一样呢 (0_0) ');
                     return;
                 }
                 handlePhoneFix(idMessage, newPhone);
@@ -380,9 +441,12 @@ fix_name_search_form.addEventListener('submit', async (e) => {
                     alert('新的邮箱不能为空');
                     return;
                 }
+                else if(newEmail === emailInformation.textContent){
+                    alert(' (0_0) 你更改后的[电子邮箱]和原先一样呢 (0_0) ');
+                    return;
+                }
                 handleEmailFix(idMessage, newEmail);
             });
-
             emailRow.appendChild(emailTitle);
             emailRow.appendChild(emailInformation);
             emailRow.appendChild(emailFixBar);
@@ -430,3 +494,96 @@ async function handlePhoneFix(userID,newPhone){
         alert("修改失败，服务器未响应!");
     }
 }
+
+async function handleNameFix(userID,newName){
+    try{
+        const response = await fetch('/admin/admin-main/fix-name', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userID,newName })
+        });
+        const result = await response.json();
+        console.log(result);
+        alert("修改用户姓名成功!");
+    }
+    catch (err) {
+        console.error("修改失败：", err);
+        alert("修改失败，服务器未响应!");
+    }
+}
+
+async function handlePwdFix(userID,newPwd){
+    try{
+        const response = await fetch('/admin/admin-main/fix-pwd', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userID,newPwd })
+        });
+        const result = await response.json();
+        console.log(result);
+        alert("修改用户密码成功!");
+    }
+    catch (err) {
+        console.error("修改失败：", err);
+        alert("修改失败，服务器未响应!");
+    }
+}
+//添加新用户按钮功能绑定
+//add-submit-button
+const addNewUserButton = document.getElementById('add-submit-button');
+const addNameBar = document.getElementById('add-user-name');
+const addPwdBar = document.getElementById('add-user-pwd');
+const addEmailBar = document.getElementById('add-user-email');
+const addPhoneBar = document.getElementById('add-user-phone');
+addNewUserButton.addEventListener('click',async (e)=>{
+    const name = addNameBar.textContent;
+    const pwd = addPwdBar.textContent;
+    const phone = addPhoneBar.textContent;
+    const email = addEmailBar.textContent;
+    if(!name || name.length <=0){
+        alert('名字不能为空\"无名氏\"先生\\女生[-_-]');
+        return;
+    }
+    
+    if(!pwd || pwd.length <=0){
+        alert('密码不能为空,为了安全[o_o]');
+        return;
+    }
+    
+    if(!phone || phone.length !== 11 || !/^\d+$/.test(phone)){
+        alert('电话号码必须为11位数字,不能为空且不能含有数字以外的字符');
+        return;
+    }
+
+    const isConfirmed = confirm('你确定要添加一个新用户吗?\n'+
+        '不妨核对一下信息:\n'+
+        '姓名:' + addNameBar.textContent+'\n'+
+        '密码:' + addPwdBar.textContent+'\n'+
+        '电话号码:' + addPhoneBar.textContent+'\n'+
+        '电子邮箱:' + addEmailBar.textContent+'\n');
+    if(isConfirmed){
+        console.log('正在添加新用户');
+        addNewUser(name,pwd,phone,email);
+    }
+    else{
+        console.log('添加新用户操作取消');
+    }
+});
+
+async function addNewUser(userName,userPwd,userPhone,userEmail){
+    try{
+        const response = await fetch('/admin/admin-main/add-new-user', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userName,userPwd,userPhone,userEmail})
+        });
+        const result = await response.json();
+        console.log(result);
+        alert("添加用户成功!");
+    }
+    catch (err) {
+        console.error("添加失败：", err);
+        alert("添加新用户失败，服务器未响应!");
+    }
+}
+

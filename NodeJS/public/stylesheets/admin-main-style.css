@@ -317,6 +317,7 @@ a,span{
 }
 
 .editable-bar{
+    min-width: 80px;
     outline-offset:-2px;
     outline-style: dashed;
     outline-color: #803cff;
@@ -331,4 +332,8 @@ a,span{
     outline-style: auto;
     outline-color: #fff;
     outline-width: 600;
+}
+
+.index-split-bar{
+    background-color: #3c7dff;
 }

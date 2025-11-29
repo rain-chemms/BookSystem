@@ -76,7 +76,48 @@ router.post('/fix-phone',async(req,res)=>{
         console.log(err);
         res.status(500).json({ err: err.message });    
     }
+});
 
+router.post('/fix-name',async(req,res)=>{
+    try {
+        var { userID,newName } = req.body;
+        //执行修改语句
+        await db.promise().query(
+            'UPDATE users SET UserName = \'' + newName + '\' WHERE UserID =' + userID + ';'
+        );
+        res.json([{ message: '修改用户ID为:'+ userID +'的Name为:'+ newName}]);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ err: err.message });    
+    }
+});
+
+router.post('/fix-pwd',async(req,res)=>{
+    try {
+        var { userID,newPwd } = req.body;
+        //执行修改语句
+        await db.promise().query(
+            'UPDATE users SET UserPwd = \'' + newPwd + '\' WHERE UserID =' + userID + ';'
+        );
+        res.json([{ message: '修改用户ID为:'+ userID +'的UserPwd为:'+ newPwd}]);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ err: err.message });    
+    }
+});
+
+router.post('/add-new-user',async(req,res)=>{
+    try {
+        var { userName,userPwd,userPhone,userEmail } = req.body;
+        //执行修改语句
+        await db.promise().query(
+            'INSERT INTO users (UserID,UserName,UserPwd,UserPhoneNumber,UserEmail) VALUES (0,\''+userName+'\',\''+userPwd+'\',\''+userPhone+'\',\''+userEmail+'\');'
+        );
+        res.json([{ message: '添加的新用户Name为:'+ userName + '\nUserPwd为:'+ userPwd + '\nUserPhone为:'+ userPhone + '\nUserEmail为:'+ userEmail}]);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ err: err.message });    
+    }
 });
 
 module.exports = router;

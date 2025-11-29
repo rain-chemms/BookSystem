@@ -153,10 +153,34 @@
             
 
             <div class="content-area" id="new-user-add-content-area">
-                <div>添加页面</div>
+                <div>
+                    <h2 style="color: #fff;margin-top:10px;">你可以在此添加一个新的用户账户</h2>
+                </div>
+                <table class="content-table" id = "user-add-table">
+                    <tr>
+                        <th colspan="3">新用户信息<th>
+                    </tr>
+                    <tr>
+                        <th>新用户姓名:</th>
+                        <td contenteditable="true" class="editable-bar" id="add-user-name"></td>
+                        <th rowspan="5">
+                            <button class="button-group-item" id="add-submit-button">添加</button>
+                        <th>
+                    </tr>
+                    <tr>
+                        <th>新用户密码:</th>
+                        <td contenteditable="true" class="editable-bar" id="add-user-pwd"></td>
+                    </tr>
+                    <tr>
+                        <th>新用户电话号码:</th>
+                        <td contenteditable="true" class="editable-bar" id="add-user-phone"></td>    
+                    </tr>
+                    <tr>
+                        <th>新用户电子邮箱:</th>
+                        <td contenteditable="true" class="editable-bar" id="add-user-email"></td>    
+                    </tr>
+                </table>
             </div>
-            
-
         </div>
     </div>
     <script src="/javascripts/admin-main-source.js"></script>
